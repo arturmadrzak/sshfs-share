@@ -1,0 +1,24 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+[*]
+charset = utf-8
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+keep_padding = true
+space_redirects = true
+spaces_around_operators = true
+tab_width = 4
+trim_trailing_whitespace = true
+
+[*.sh]
+max_line_length = 80
+shell_varint = posix
+
+[*{spec.sh,helper.sh}]
+tab_width=2
+indent_size=2
+
+[*.{yaml,yml}]
+max_line_length = 80
+indent_size = 2
