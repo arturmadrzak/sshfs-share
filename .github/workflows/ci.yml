@@ -1,0 +1,23 @@
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: sudo apt-get update --quiet
+      - run: sudo apt-get install --quiet --yes --no-install-recommends shellcheck
+      - uses: actions/checkout@v3
+      - name: "Lint shell scripts"
+        run: find . -type f -name "*.sh" -exec shellcheck "{}" \;
+      - name: "Lint Dockerfiles"
+        run: |
+          find . -type f -name "Dockerfile" \
+            -exec sh -c "docker run --rm -i hadolint/hadolint:latest < {}" \;
+
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: curl -fsSL https://git.io/shellspec | sh -s -- --yes
+      - uses: actions/checkout@v3
+      - run: shellspec
+
